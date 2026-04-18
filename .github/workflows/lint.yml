@@ -1,25 +1,5 @@
 name: lint
-jobs:
-  lint:
-    container:
-      image: ruby
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: deps
-        restore-keys: deps
-    - name: setup
-      run: |-
-        git config --global --add safe.directory /__w/gem-base/gem-base
-        gem install bundler
-        git submodule update --init
-        bundle config set path 'vendor/bundle'
-        bundle install -j 4
-    - name: script
-      run: bundle exec rubocop
+
 'on':
   push:
     branches:
@@ -27,3 +7,25 @@ jobs:
   pull_request:
     branches:
     - master
+
+permissions:
+  contents: read
+
+'on':
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.4'
+        bundler-cache: true
+    - name: script
+      run: bundle exec rubocop
