@@ -19,17 +19,10 @@ Gem::Specification.new do |spec|
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/davidsiaw/gem-base'
   spec.metadata['changelog_uri'] = 'https://github.com/davidsiaw/gem-base'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.files         = Dir['{exe,data,lib}/**/*'] + %w[Gemfile base.gemspec]
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
-
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'rubocop-rake'
-  spec.add_development_dependency 'rubocop-rspec'
-  spec.add_development_dependency 'rubocop-yard'
-  spec.add_development_dependency 'yard'
 end
