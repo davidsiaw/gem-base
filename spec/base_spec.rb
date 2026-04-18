@@ -2,6 +2,10 @@
 
 RSpec.describe Base do
   it 'has a version number' do
-    expect(Base::VERSION).not_to be_nil
+    expect(Base::VERSION).not_to be nil
+  end
+
+  it 'does something useful' do
+    expect(false).to be(true)
   end
 end

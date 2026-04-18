@@ -1,15 +1,14 @@
 name: lint
 
 on:
-  push:
-    branches:
-    - master
   pull_request:
-    branches:
-    - master
+    types:
+    - opened
+    - synchronize
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   lint:
@@ -20,5 +19,10 @@ jobs:
       with:
         ruby-version: '3.4'
         bundler-cache: true
-    - name: script
-      run: bundle exec rubocop
+    - uses: reviewdog/action-rubocop@fcb74ba274da10b18d038d0bcddaae3518739634 # v2.21.2
+      with:
+        reporter: github-pr-review # Default is github-pr-check
+        skip_install: true
+        use_bundler: true
+        only_changed: true
+        fail_level: any
