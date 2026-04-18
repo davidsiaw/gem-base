@@ -26,6 +26,7 @@ jobs:
         path: doc
 
   deploy-docs:
+    needs: build-docs
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -34,7 +35,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.upload.outputs.page_url }}
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
